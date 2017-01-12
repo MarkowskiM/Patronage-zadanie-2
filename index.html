@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Score counter</title>
+        <link href="main.css" rel="stylesheet">
+    </head>
+    <body>
+    <div id="counters-wrap">
+        
+        <div id="score-1" class='score'>
+            <h1>Score 1: <span class="counter"></span></h1>
+            <form>
+                <button type='button' class="up">Up</button>
+                <button type='button' class="down">Down</button>
+                <button type='button' class="get">Get</button>
+                <input class="value" type="number">
+                <button type='button' class="set">Set</button>
+                <button type='button' class="reset">Reset</button>
+                <button type='button' class='remove'>Remove counter</button>
+            </form>
+        </div>
+        <div id="score-2" class='score'>
+            <h1>Score 2: <span class="counter"></span></h1>
+            <form>
+                <button type='button' class="up">Up</button>
+                <button type='button' class="down">Down</button>
+                <button type='button' class="get">Get</button>
+                <input class="value" type="number">
+                <button type='button' class="set">Set</button>
+                <button type='button' class="reset">Reset</button>
+                <button type='button' class='remove'>Remove counter</button>
+            </form>
+        </div>
+        <div id="score-3" class='score'>
+            <h1>Score 3: <span class="counter"></span></h1>
+            <form>
+                <button type='button' class="up">Up</button>
+                <button type='button' class="down">Down</button>
+                <button type='button' class="get">Get</button>
+                <input class="value" type="number">
+                <button type='button' class="set">Set</button>
+                <button type='button' class="reset">Reset</button>
+                <button type='button' class='remove'>Remove counter</button>
+            </form>
+        </div>
+    </div>
+
+        <button id='addCounter'>Add new counter</button>
+
+        <script src="score-counter.js"></script>
+        <script src="score-ui.js"></script>
+        <script>
+            var score1 = new ScoreUI(document.getElementById("score-1"), 1, 0);
+            var score2 = new ScoreUI(document.getElementById("score-2"), 2, 10);
+            var score3 = new ScoreUI(document.getElementById("score-3"), 4, 100);
+
+            // Add new counters
+            var counterNumber = document.querySelectorAll('.score').length;
+            function addCounter(){
+
+                var counterTemplate
+                    =   '<h1>Score ' + (counterNumber+1) + ': <span class="counter"></span></h1>'
+                    +   '<form>'
+                    +       '<button type="button" class="up">Up</button>'
+                    +       '<button type="button" class="down">Down</button>'
+                    +       '<button type="button" class="get">Get</button>'
+                    +       '<input class="value" type="number">'
+                    +       '<button type="button" class="set">Set</button>'
+                    +       '<button type="button" class="reset">Reset</button>'
+                    +       '<button type="button" class="remove">Remove counter</button>'
+                    +   '</form>';
+
+                var startValue = 0; // by default all new counters have initial value = 0
+                var format = 5; // by default all new counters have 5 digits
+                var divForCounter = document.createElement('div');
+                divForCounter.id = "score-" + (counterNumber+1);
+                divForCounter.innerHTML = counterTemplate;
+                document.querySelector('#counters-wrap').appendChild(divForCounter);
+                counterNumber++;
+
+                var newCounter = new ScoreUI(divForCounter, format, startValue);
+            }
+
+            document.getElementById('addCounter').addEventListener('click', function() {
+                addCounter();
+            })
+
+        </script>
+
+
+
+    </body>
+</html>
